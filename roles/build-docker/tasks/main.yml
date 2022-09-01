@@ -1,0 +1,10 @@
+---
+#Tasks file to build pulled Docker image
+  - name: 3.0 - Pull Docker image from ECR
+    shell: "sudo docker pull 837222496434.dkr.ecr.eu-central-1.amazonaws.com/jenkins_repo:latest"
+
+ # - name: 3.1 - Get Docker image ID
+ #   shell: IMAGE = docker images --format \{\{.ID\}\}
+
+  - name: 3.1 - Run Docker image
+    shell: sudo docker run -d -p 8080:80 $(docker images --format \{\{.ID\}\})

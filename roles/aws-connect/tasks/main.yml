@@ -1,0 +1,13 @@
+---
+#Tasks file to connect to ECR
+  - name: 2.0 - Install package dependencies.
+    package: name={{ item }} state=present
+    with_items:
+      - python
+      - unzip
+
+  - name: 2.1 - Install the AWSCLI
+    shell: "sudo apt install -y awscli"
+
+  - name: 2.2 - Login to AWS
+    ansible.builtin.shell: "docker login --username AWS --password $(aws ecr get-login-password --region eu-central-1) https://837222496434.dkr.ecr.eu-central-1.amazonaws.com"
