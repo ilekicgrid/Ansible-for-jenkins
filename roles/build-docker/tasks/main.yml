@@ -7,4 +7,4 @@
  #   shell: IMAGE = docker images --format \{\{.ID\}\}
 
   - name: 3.1 - Run Docker image
-    shell: sudo docker run -d -p 8080:80 $(docker images --format \{\{.ID\}\})
+    shell: sudo docker run -d -p 8080:80 jenkins_repo:latest
