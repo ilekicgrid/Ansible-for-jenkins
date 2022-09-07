@@ -12,7 +12,7 @@ pipeline {
 
         stage('Ansible-playbook'){
             steps{
-                ansiblePlaybook become: true, credentialsId: 'ecr:eu-central-1:aws-credentials', disableHostKeyChecking: true, inventory: 'hosts.yml', playbook: 'sites.yml'
+                ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'ecr:eu-central-1:aws-credentials', disableHostKeyChecking: true, inventory: 'hosts.yml', playbook: 'sites.yml'
             }
         }
     }
