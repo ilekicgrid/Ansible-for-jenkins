@@ -11,7 +11,7 @@ pipeline {
             stage('Start application with Ansible') {
                         steps {
                             script {
-                                ansiblePlaybook credentialsId: 'ansible-jenkins', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'sites.yml'
+                                ansiblePlaybook credentialsId: 'jenkins', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'sites.yml'
                             }
                         }
                     }
