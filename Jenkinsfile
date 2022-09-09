@@ -1,19 +1,19 @@
 pipeline {
-    agent any
-    options {
-        skipStagesAfterUnstable()
-    }
-    stages{
-        stage('Pull ansible prerequisites'){
-            steps{
-                git branch: 'main', credentialsId: 'ecr:eu-central-1:aws-credentials', url: 'https://github.com/ilekicgrid/Ansible-for-jenkins.git'
-            }
-        }
+	agent any
+	stages {
+		stage('Checkout') {
+                    steps {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ilekicgrid/Ansible-for-jenkins.git']]])
 
-        stage('Ansible-playbook'){
-            steps{
-                ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'ecr:eu-central-1:aws-credentials', disableHostKeyChecking: true, inventory: 'hosts.yml', playbook: 'sites.yml'
-            }
-        }
-    }
+                  }
+                }
+
+            stage('Start application with Ansible') {
+                        steps {
+                            script {
+                                ansiblePlaybook credentialsId: 'ansible-jenkins', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'sites.yml'
+                            }
+                        }
+                    }
+	}
 }
