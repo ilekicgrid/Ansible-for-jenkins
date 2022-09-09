@@ -11,7 +11,7 @@ pipeline {
             stage('Start application with Ansible') {
                         steps {
                             script {
-                                ansiblePlaybook become: yes, becomeUser: 'ubuntu', credentialsId: 'key-ssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'sites.yml'
+                                ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'key-ssh', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yml', playbook: 'sites.yml'
                             }
                         }
                     }
